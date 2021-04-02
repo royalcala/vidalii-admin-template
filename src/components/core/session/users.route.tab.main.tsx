@@ -1,9 +1,11 @@
 import React from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { Tab } from '../admin/Admin.Doc.Tabs';
+import { PropsTab, Tab } from '../admin/Admin.Doc.Tabs';
 import { TableEdit, TableProps } from "../form/Table.Edit";
-// https://codesandbox.io/s/react-hook-form-usefieldarray-vy8fv?file=/src/index.js:1031-1716
-function TabMain() {
+import util from "util";
+
+const Mutation = Symbol()
+function TabMain({ mutation }: PropsTab) {
   const { control, getValues } = useForm<{}>({
     defaultValues: {
       users: [
@@ -13,11 +15,21 @@ function TabMain() {
       ]
     }
   })
-
+  mutation.set(Mutation,
+    () => {
+      //util.inspect for print object to string
+      const values = util.inspect(getValues()).replaceAll("'", '"')
+      return `#graphql
+      userUpdateMyAccount(user:${values}){
+        _id
+      }
+      `
+    }
+  )
 
   const config: TableProps['config'] = {
     _id: {
-      headTitle: "Id",
+      headTitle: "_id",
       type: 'string'
     },
     firstName: {
@@ -35,7 +47,7 @@ function TabMain() {
       console.log(getValues())
     }}>GetValuesOfTable</button>
 
-    <TableEdit config={config} configArray={{ control, defaultValuesKey: 'users' }} />
+    <TableEdit config={config} configArray={{ control, defaultValuesKey: 'users', keyName: "_id" }} />
   </>
   )
 }

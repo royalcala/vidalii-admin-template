@@ -31,7 +31,7 @@ export type TableProps = {
     },
     configArray: {
         defaultValuesKey: string,
-        // keyName: string
+        keyName: string
         control: UseFormMethods['control']
     }
 
@@ -53,9 +53,12 @@ export function TableEdit(props: TableProps) {
             <Table className={classes.table} size="small" aria-label="dense table">
                 <TableHead>
                     <TableRow>
-                        <TableCell align="center" key={0}></TableCell>
+                        <TableCell align="center" key={0} />
                         {entries.map(
-                            ([key, value], index) => <TableCell align="left" key={index + 1}>{value.headTitle}</TableCell>
+                            ([key, value], index) =>
+                                props.configArray.keyName === key ?
+                                    <TableCell align="left" key={index + 1}>#item</TableCell>
+                                    : <TableCell align="left" key={index + 1}>{value.headTitle}</TableCell>
                         )}
                         {/* <TableCell>Dessert (100g serving)</TableCell>
                         <TableCell align="right">Protein&nbsp;(g)</TableCell> */}
@@ -80,22 +83,26 @@ export function TableEdit(props: TableProps) {
                                         {entries.map(
                                             ([nameField, configField], index) => {
                                                 return (
-                                                    <TableCell align="left" key={index}>
+                                                    <TableCell align="left" key={index} >
                                                         <Controller
                                                             name={`${props.configArray.defaultValuesKey}[${indexRow}].${nameField}`}
                                                             control={props.configArray.control}
                                                             defaultValue={row[nameField]}
                                                             rules={configField?.rules ? configField.rules : {}}
                                                             render={({ onChange, value }) =>
-                                                                <InputBase
-                                                                    placeholder={nameField}
-                                                                    // id={uniqueId}
-                                                                    value={value}
-                                                                    onChange={onChange}
-                                                                // name={nameField}
-                                                                />
+                                                                props.configArray.keyName === nameField
+                                                                    ? <div>{indexRow + 1}</div>
+                                                                    :
+                                                                    <InputBase
+                                                                        placeholder={nameField}
+                                                                        // id={uniqueId}
+                                                                        value={value}
+                                                                        onChange={onChange}
+                                                                    // name={nameField}
+                                                                    />
                                                             }
                                                         />
+
                                                     </TableCell>
                                                 )
                                             }
