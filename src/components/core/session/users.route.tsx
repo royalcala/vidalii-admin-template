@@ -1,8 +1,7 @@
 import React from "react";
 import { Route } from "components/core/routes/Routes.many.rcontext";
 import AccountIcon from 'template-icons/AccountCircle';
-import { Tab } from "../admin/Admin.Doc.Tabs";
-import { Doc } from "../admin/Admin.Doc_";
+import { TableView, TableProps } from "../form/Table.View";
 const route: Route = {
     name: 'Users',
     parent: 'System',
@@ -12,21 +11,30 @@ const route: Route = {
 }
 export default route
 
-const getTabs = require.context(
-    'components',
-    true,
-    /users\.route\.tab\..+\.(tsx|js)$/
-)
 
-const Tabs = getTabs.keys().map(dir => {
-    return getTabs(dir).default as Tab
-})
 
-function Users() {    
-    return <Doc
-        breadcrum={route}
-        tabs={Tabs}
-    />
+function Users() {
+    const config: TableProps['config'] = {
+        _id: {
+            alias: "_id",
+            type: 'string'
+        },
+        lastname: {
+            alias: "lastName",
+            type: "string"
+        }
+    }
+    const data: TableProps['data'] = [
+        {
+            _id: 1,
+            lastname: "alcala"
+        },
+        {
+            _id: 2,
+            lastname: "alcala"
+        }
+    ]
+    return <TableView config={config} data={data} />
 }
 
 

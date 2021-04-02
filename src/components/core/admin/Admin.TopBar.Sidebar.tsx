@@ -58,7 +58,7 @@ const GetParentChildren = (parent: string, history: any, setStateDrawer: any) =>
 }
 const GetRouteItems = (Routes: Route[], setStateItems: () => (a: Items) => void, history: any, setStateDrawer: any) => {
   const parentsPrinted: string[] = []
-  return Routes.filter(value => value.sidebar === true)
+  return  Routes.filter(value => value.sidebar === true)
     .sort(
       (a, b) => {
         if (a.name > b.name)
