@@ -77,15 +77,15 @@ export default function DocTabs(props: { tabs: Tab[], mutation: PropsTab['mutati
     ).map(
         (tab, index) => {
             return (
-                <Tab label={tab.title} {...a11yProps(index)} />
+                <Tab label={tab.title} {...a11yProps(index)} key={index}/>
             )
         }
     )
     const TabsContent = props.tabs.map(
         (tab, index) => {
             return (
-                <TabPanel value={activeTab} index={index}>
-                    <tab.Component mutation={props.mutation} />
+                <TabPanel value={activeTab} index={index} key={index}>
+                    <tab.Component mutation={props.mutation} key={index} />
                 </TabPanel>
             )
         }

@@ -9,9 +9,10 @@ export default function SwitchRoutes() {
     return (
         <Switch>
             { Routes.map(
-                ({ Component, name, parent }) => {
+                ({ Component, name, parent }, index) => {
                     return (
                         <Route
+                            key={index}
                             path={parent === null ? '/' + name : '/' + parent + '.' + name}
                             component={Component as any}
                         />

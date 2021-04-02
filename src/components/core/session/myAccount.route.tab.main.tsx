@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropsTab, Tab } from "components/core/admin/Admin.Doc.Tabs"
 import { useMutation, useQuery } from 'graphql-hooks'
-import { FormProps, Form } from "../form/formControl";
+import { FormProps, Form } from "../form/form";
 import { useForm } from 'react-hook-form';
 import util from "util";
 const UPDATE_MY_USER = `#graphql
@@ -24,11 +24,12 @@ query GetMyUser{
 `
 const Mutation = Symbol()
 function TabMain({ mutation }: PropsTab) {
-  const { control, getValues } = useForm<{}>();
+  const { control, getValues } = useForm<{}>()
+
   mutation.set(Mutation,
     () => {
       //util.inspect for print object to string
-      const values = util.inspect(getValues()).replaceAll("'",'"')
+      const values = util.inspect(getValues()).replaceAll("'", '"')
       return `#graphql
       userUpdateMyAccount(user:${values}){
         _id
@@ -50,15 +51,14 @@ function TabMain({ mutation }: PropsTab) {
       type: 'string'
     },
     email: {
+      alias: "email(username)",
       type: 'email',
-      helperText: 'It is used like username'
     },
     phone: {
       type: 'number'
     }
   }
-  return <Form
-    id="myAccountMain"
+  return <Form    
     data={data.myUser}
     config={myUser_config}
     control={control}

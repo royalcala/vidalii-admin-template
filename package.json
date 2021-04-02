@@ -5,6 +5,7 @@
     "email": "alcala.rao@gmail.com",
     "name": "Roy Alcala Ortiz"
   },
+  "proxy": "http://localhost:4001",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
