@@ -12,6 +12,8 @@ import { blue } from 'template-core/colors';
 import IconButton from 'template-core/IconButton';
 import Tooltip from 'template-core/Tooltip';
 import { FormControl, FormHelperText, Input, InputLabel } from "template-core";
+import { useHistory } from "react-router-dom";
+
 const useStyles = makeStyles({
     table: {
         // minWidth: 650,
@@ -27,26 +29,27 @@ export type TableProps = {
         }
     },
     data: any[]
-
+    routeToOpen: string // /route/:slug
 }
 
 export function TableView(props: TableProps) {
     const classes = useStyles();
     const entries = Object.entries(props.config)
+    let history = useHistory();
     return (
         <TableContainer component={Paper}>
             <Table className={classes.table} size="small" aria-label="dense table">
                 <TableHead>
                     <TableRow>
-                        <TableCell align="left" key={0}/>
+                        <TableCell align="left" key={0} />
                         {entries.map(
                             ([key, value], index) => (
                                 <TableCell align="left" key={index + 1}>
                                     <FormControl variant="filled">
-                                        <InputLabel htmlFor={key+index}>{value.alias}</InputLabel>
+                                        <InputLabel htmlFor={key + index}>{value.alias}</InputLabel>
                                         <Input
-                                            id={key+index}
-                                            onChange={()=>{}}
+                                            id={key + index}
+                                            onChange={() => { }}
                                             name={key}
                                         />
                                     </FormControl>
@@ -65,7 +68,7 @@ export function TableView(props: TableProps) {
                                             <Tooltip title="Open">
                                                 <IconButton color="inherit" aria-label="Delete"
                                                     onClick={() => {
-                                                       
+                                                        history.push(props.routeToOpen);
                                                     }}>
                                                     <OpenInNewIcon style={{ color: blue[300] }} />
                                                 </IconButton>
@@ -74,7 +77,7 @@ export function TableView(props: TableProps) {
                                         {entries.map(
                                             ([nameField, configField], index) => {
                                                 return (
-                                                    <TableCell align="left" key={index} >                                                        
+                                                    <TableCell align="left" key={index} >
                                                         {row[nameField]}
                                                     </TableCell>
                                                 )

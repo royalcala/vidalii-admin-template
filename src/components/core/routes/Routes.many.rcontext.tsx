@@ -5,7 +5,7 @@ export type Route = {
     sidebar: boolean,
     // Icon: JSX.Element,
     Icon: React.FunctionComponent,
-    Component:  React.FunctionComponent
+    Component:  React.FunctionComponent | Function
 }
 
 const getContext = require.context(
