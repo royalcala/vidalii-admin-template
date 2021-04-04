@@ -49,7 +49,8 @@ export type Props = {
 export default function DocHeader({ breadcrum, gql }: Props) {
     const classes = useStyles();
     const client = React.useContext(ClientContext)
-    let location = useLocation().pathname.replace('/', '_').replace('.', '_').replace('-', '_')
+    const p = useLocation().pathname.split('/')
+    const location = (p[0] + '_' + p[1]).replace('.','_')
     const saveDocOnClick = async () => {
         let query = Array.from(gql.mutation.values()).map(
             values => values()

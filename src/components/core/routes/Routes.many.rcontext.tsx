@@ -2,10 +2,10 @@
 export type Route = {
     name: string,
     parent: string | null
-    sidebar: boolean,
-    // Icon: JSX.Element,
+    paramaters?: string, // /:parameter1/:parameter2
+    sidebar?: boolean,
     Icon: React.FunctionComponent,
-    Component:  React.FunctionComponent | Function
+    Component: React.FunctionComponent | Function
 }
 
 const getContext = require.context(

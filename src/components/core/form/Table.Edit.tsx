@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 export type TableProps = {
     config: {
         [key: string]: {
-            headTitle: string,
+            alias: string,
             type: 'string' | 'number' | 'email' | 'password' | 'autocompletes'//html5
             helperText?: string,
             rules?: UseControllerOptions<any>['rules'],
@@ -58,7 +58,7 @@ export function TableEdit(props: TableProps) {
                             ([key, value], index) =>
                                 props.configArray.keyName === key ?
                                     <TableCell align="left" key={index + 1}>#item</TableCell>
-                                    : <TableCell align="left" key={index + 1}>{value.headTitle}</TableCell>
+                                    : <TableCell align="left" key={index + 1}>{value.alias}</TableCell>
                         )}
                         {/* <TableCell>Dessert (100g serving)</TableCell>
                         <TableCell align="right">Protein&nbsp;(g)</TableCell> */}

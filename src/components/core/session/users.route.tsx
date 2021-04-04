@@ -32,25 +32,15 @@ function Users() {
     if (error) return 'Error:' + JSON.stringify(error)
     const config: TableProps['config'] = {
         _id: {
-            alias: "_id",
+            alias: "ID",
             type: 'string'
         },
         lastname: {
-            alias: "lastName",
+            alias: "LastName",
             type: "string"
         }
     }
-    // const data: TableProps['data'] = [
-    //     {
-    //         _id: 1,
-    //         lastname: "alcala"
-    //     },
-    //     {
-    //         _id: 2,
-    //         lastname: "alcala"
-    //     }
-    // ]
-    return <TableView config={config} data={data.users} routeToOpen="/System/User/:slug" />
+    return <TableView config={config} data={data.users} open={{ url: "/System.User", parameters: ['_id'] }} />
 }
 
 

@@ -11,6 +11,8 @@ import OpenInNewIcon from 'template-icons/OpenInNew';
 import { blue } from 'template-core/colors';
 import IconButton from 'template-core/IconButton';
 import Tooltip from 'template-core/Tooltip';
+// import Link from 'template-core/Link';
+import { Link } from 'react-router-dom'
 import { FormControl, FormHelperText, Input, InputLabel } from "template-core";
 import { useHistory } from "react-router-dom";
 
@@ -29,7 +31,10 @@ export type TableProps = {
         }
     },
     data: any[]
-    routeToOpen: string // /route/:slug
+    open: {
+        url: string,//-->/System.User
+        parameters: string[]//-->_id
+    } // /route/:slug
 }
 
 export function TableView(props: TableProps) {
@@ -66,12 +71,20 @@ export function TableView(props: TableProps) {
                                     <TableRow key={indexRow}>
                                         <TableCell align="left" key={indexRow}>
                                             <Tooltip title="Open">
-                                                <IconButton color="inherit" aria-label="Delete"
-                                                    onClick={() => {
-                                                        history.push(props.routeToOpen);
-                                                    }}>
+                                                {/* <IconButton color="inherit" aria-label="Delete" */}
+                                                <Link to={props.open.url + `/${props.open.parameters.map(
+                                                    nameParameter => {
+                                                        return row[nameParameter]
+                                                    }
+                                                ).join('/')
+                                                    }`}
+                                                // onClick={() => {
+                                                //     history.push(props.routeToOpen);
+                                                // }}}
+                                                >
                                                     <OpenInNewIcon style={{ color: blue[300] }} />
-                                                </IconButton>
+                                                    {/* </IconButton> */}
+                                                </Link>
                                             </Tooltip>
                                         </TableCell>
                                         {entries.map(
