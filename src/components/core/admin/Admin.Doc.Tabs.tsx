@@ -5,7 +5,7 @@ import Tabs from 'template-core/Tabs';
 import Tab from 'template-core/Tab';
 import Typography from 'template-core/Typography';
 import Box from 'template-core/Box';
-import type { Props as PropsHeader } from "./Admin.Doc.Header";
+import type { Props as PropsHeader } from "./Admin.Doc.Header.Save";
 
 
 interface TabPanelProps {

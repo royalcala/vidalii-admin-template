@@ -1,5 +1,5 @@
 import React from 'react'
-import DocHeader, { Props as HeaderProps } from "./Admin.Doc.Header";
+import DocHeaderSave, { Props as HeaderProps } from "./Admin.Doc.Header.Save";
 import DocTabs, { Tab } from "./Admin.Doc.Tabs";
 import DocFooter from "components/core/admin/Admin.Doc.Footer";
 
@@ -14,7 +14,7 @@ export function Doc(props: Props) {
     const mutation: HeaderProps['gql']['mutation'] = new Map()
     return (
         <>
-            <DocHeader
+            <DocHeaderSave
                 breadcrum={props.breadcrum}
                 gql={{
                     mutation

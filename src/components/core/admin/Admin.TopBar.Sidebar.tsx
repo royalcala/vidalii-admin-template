@@ -52,13 +52,13 @@ const Children = (value: Route, index: number, history: any, setStateDrawer: any
   )
 }
 const GetParentChildren = (parent: string, history: any, setStateDrawer: any) => {
-  return Routes.filter(value => value.parent === parent).map(
+  return Routes.filter(value => value.sidebar === true).filter(value => value.parent === parent).map(
     (value, index) => Children(value, index, history, setStateDrawer)
   )
 }
 const GetRouteItems = (Routes: Route[], setStateItems: () => (a: Items) => void, history: any, setStateDrawer: any) => {
   const parentsPrinted: string[] = []
-  return  Routes.filter(value => value.sidebar === true)
+  return Routes.filter(value => value.sidebar === true)
     .sort(
       (a, b) => {
         if (a.name > b.name)
