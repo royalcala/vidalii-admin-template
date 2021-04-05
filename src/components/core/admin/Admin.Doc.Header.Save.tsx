@@ -46,11 +46,11 @@ export type Props = {
 }
 
 
-export default function DocHeader({ breadcrum, gql }: Props) {
+export function DocSave({ breadcrum, gql }: Props) {
     const classes = useStyles();
     const client = React.useContext(ClientContext)
     const p = useLocation().pathname.split('/')
-    const location = (p[0] + '_' + p[1]).replace('.','_')
+    const location = (p[0] + '_' + p[1]).replace('.', '_')
     const saveDocOnClick = async () => {
         let query = Array.from(gql.mutation.values()).map(
             values => values()
@@ -62,58 +62,35 @@ export default function DocHeader({ breadcrum, gql }: Props) {
         })
     }
 
-    const SaveDoc = () => {
-        return (
-            <>
-                <Box m={1}>
-                    <Breadcrumbs aria-label="breadcrumb">
-                        {breadcrum?.parent !== null ?
-                            <Link color="inherit" href="#" className={classes.link}>
-                                {breadcrum.parent}
-                            </Link>
-                            : <Link color="inherit" href="#" className={classes.link}>
-                                /
-            </Link>
-                        }
-                        <Typography color="textPrimary" className={classes.link}>
-                            <breadcrum.Icon className={classes.icon} />
-                            {breadcrum.name}
-                        </Typography>
-                    </Breadcrumbs>
-                </Box>
-                < Box m={1} >
-                    <Button
-                        onClick={saveDocOnClick}
-                        variant="outlined" color="primary" className={classes.button}
-                    >
-                        Save
-                    </Button>
-                    <Button color="secondary" className={classes.button}>
-                        Discard
-                    </Button>
-                </Box >
-            </>
-        )
-    }
-
-
-
     return (
-        <div className={classes.root}>
-            <Grid container >
-                <Grid item xs={12}>
-                    <Paper className={classes.paper}>
-                        <Grid container >
-                            <Grid item xs={2} >
-                                <SaveDoc />
-                            </Grid>
-                            <Grid item xs={10}>
-                                <Workflow />
-                            </Grid>
-                        </Grid>
-                    </Paper>
-                </Grid>
-            </Grid>
-        </div>
-    );
+        <>
+            <Box m={1}>
+                <Breadcrumbs aria-label="breadcrumb">
+                    {breadcrum?.parent !== null ?
+                        <Link color="inherit" href="#" className={classes.link}>
+                            {breadcrum.parent}
+                        </Link>
+                        : <Link color="inherit" href="#" className={classes.link}>
+                            /
+            </Link>
+                    }
+                    <Typography color="textPrimary" className={classes.link}>
+                        <breadcrum.Icon className={classes.icon} />
+                        {breadcrum.name}
+                    </Typography>
+                </Breadcrumbs>
+            </Box>
+            < Box m={1} >
+                <Button
+                    onClick={saveDocOnClick}
+                    variant="outlined" color="primary" className={classes.button}
+                >
+                    Save
+                    </Button>
+                <Button color="secondary" className={classes.button}>
+                    Discard
+                    </Button>
+            </Box >
+        </>
+    )
 }

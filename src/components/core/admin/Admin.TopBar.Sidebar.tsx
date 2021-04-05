@@ -44,7 +44,7 @@ const Children = (value: Route, index: number, history: any, setStateDrawer: any
   return (
     < ListItem button key={index} onClick={() => {
       setStateDrawer(false)
-      history.push(to);
+      history.push('/'+to);
     }}>
       <ListItemIcon><value.Icon /></ListItemIcon>
       <ListItemText primary={value.name} />
